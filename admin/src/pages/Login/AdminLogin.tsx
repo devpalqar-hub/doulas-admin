@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import styles from "./login.module.css";
 import { sendOtp, verifyOtp } from "../../services/auth.service";
-import { useToast } from "../../shared/ToastContext";
+import { useToast } from "../../shared/toast/ToastContext";
 import { LuBadgeCheck, LuLock } from "react-icons/lu";
 
 const AdminLogin = () => {
@@ -45,7 +45,7 @@ const AdminLogin = () => {
 
       showToast("Login successful", "success");
 
-      window.location.href = "/admin/dashboard";
+      window.location.href = "/dashboard";
     } catch (err) {
       console.error(err);
       showToast("Invalid OTP or unauthorized admin", "error");
