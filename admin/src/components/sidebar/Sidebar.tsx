@@ -8,7 +8,7 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineEventAvailable } from "react-icons/md";
 import { LuUsers } from "react-icons/lu";
 import { HiOutlineVideoCamera } from "react-icons/hi";
-import { GiTakeMyMoney } from "react-icons/gi";
+import { GiTakeMyMoney, GiWorld } from "react-icons/gi";
 import { FiBookOpen, FiMessageSquare } from "react-icons/fi";
 
 const Sidebar = () => {
@@ -78,6 +78,12 @@ const Sidebar = () => {
             `${styles.item} ${isActive ? styles.active : ""}`
           }>
             <GiTakeMyMoney size={20} /> Revenue
+          </NavLink>
+
+          <NavLink to="/regions" className={({ isActive }) =>
+            `${styles.item} ${isActive ? styles.active : ""}`
+          }>
+            <GiWorld size={20} /> Regions
           </NavLink>
 
           <NavLink to="/bookings" className={({ isActive }) =>

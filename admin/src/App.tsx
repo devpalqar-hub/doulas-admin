@@ -14,6 +14,8 @@ import MeetingDetails from './pages/meetings/MeetingDetails';
 import ViewDoulaPage from './pages/manageDoulas/viewDoula';
 import CreateZoneManager from './pages/zonemanagers/CreateZoneManager'
 import ViewZoneManager from "./pages/zonemanagers/ViewZoneManager";
+import Regions from './pages/regions/Regions';
+import EditRegion from './pages/regions/EditRegion';
 
 function PrivaterRoute({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem("adminToken");
@@ -50,6 +52,24 @@ function App() {
           </PrivaterRoute>
         } />
 
+        <Route path='/regions' element={
+          <PrivaterRoute>
+            <Regions />
+          </PrivaterRoute>
+        } />
+
+        <Route path='/regions/:id' element={
+          <PrivaterRoute>
+            <EditRegion />
+          </PrivaterRoute>
+        } />
+
+        <Route path='/regions/create' element={
+          <PrivaterRoute>
+            <EditRegion />
+          </PrivaterRoute>
+        } />
+        
         <Route path='/bookings' element={
           <PrivaterRoute>
             <Bookings />

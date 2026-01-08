@@ -130,7 +130,9 @@ const [loadingRegions, setLoadingRegions] = useState(false);
           <div className={styles.filtersCard}> 
             <div className={styles.searchRow}>
               <div className={styles.searchInput}>
-                <FiSearch className={styles.searchIcon} />
+                <span className={styles.searchIcon} >
+                  <FiSearch />
+                </span>
                 <input
                   type="text"
                   placeholder="Search by name, email, or phone..."
