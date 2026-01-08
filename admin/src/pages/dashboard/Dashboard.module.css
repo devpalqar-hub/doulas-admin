@@ -1,75 +1,221 @@
-body {
-  overflow-x: hidden;
-}
+/* ROOT */
 .dashboardRoot {
-    display: flex;
-    background: #ffff;
-    min-height: 100vh;
-    width: 100%;
+  display: flex;
+  min-height: 100vh;
+  background: #ffffff;
+  font-family: "Inter", sans-serif;
 }
 
 .contentArea {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; 
 }
 
 .pageContent {
-    padding: 22px 16px;
-    overflow-x: hidden;
+  padding: 28px;
 }
 
-.title {
-  font-size: 24px;
-  font-weight: 500;
+/* HEADER */
+.pageHeader {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.pageHeader h1 {
+  font-size: 28px;
+  font-weight: 700;
   color: #111827;
 }
 
-.zoneStatus {
-    font-size: 16px;
-    font-weight: 400;
-    color: #62748E;
-    margin-top: 4px;
+.pageHeader p {
+  margin-top: 6px;
+  color: #6b7280;
+  font-size: 14px;
 }
 
-.activeTag {
-    background-color: #DCFCE7;
-    padding: 2px 8px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 500;
-    color: #008236;
+/* REGION */
+.regionBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.row{
-    margin-top: 20px;
-    display: flex;
-    gap: 20px;
-    width: 100%;
-    min-width: 0;
+
+.regionBar select {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
 }
-.child1,
-.child2 {
-    min-width: 0;
+
+/* SUMMARY GRID */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 28px;
 }
-.child1{
-    flex: 2;
+
+.summaryCard {
+  background: linear-gradient(135deg, #8335a0, #9f4dcc);
+  color: white;
+  border-radius: 18px;
+  padding: 22px;
+  transition: transform 0.35s ease;
 }
-.child2{
-    flex: 1;
+
+.summaryCard:hover {
+  transform: translateY(-6px);
 }
-@media (max-width: 480px) {
+
+.summaryCard span {
+  font-size: 32px;
+  font-weight: 700;
+  display: block;
+  margin-top: 8px;
+}
+
+/* ANALYTICS GRID (Charts + Activity) */
+.analyticsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.chartCard {
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* DAILY ACTIVITY FULL WIDTH */
+.analyticsGrid > :nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+/* TABLE */
+.tableCard {
+  margin-top: 30px;
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+th,
+td {
+  text-align: center;
+}
+
+th {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+tbody tr {
+  background: #fafafa;
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: #f5f3ff;
+}
+
+td {
+  padding: 12px 14px;
+  font-size: 14px;
+}
+
+/* STATUS */
+.active,
+.inactive {
+  display: inline-flex;
+  justify-content: center;
+  min-width: 70px;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.inactive {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* SKELETON */
+.skeleton {
+  width: 100%;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #f3f4f6, #e5e7eb, #f3f4f6);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .cardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .analyticsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .analyticsGrid > :nth-child(3) {
+    grid-column: auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
   .pageContent {
-    padding: 16px;
-  }
-}
-@media (max-width: 768px) {
-  .row {
-    flex-direction: column; 
-    gap: 16px;
+    padding: 18px;
   }
 
-  .child1,
-  .child2 {
-    width: 100%;
+  .pageHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .pageHeader h1 {
+    font-size: 22px;
+  }
+
+  .summaryCard span {
+    font-size: 26px;
+  }
+
+  .cardGrid {
+    grid-template-columns: 1fr;
   }
 }
