@@ -12,6 +12,8 @@ import Testimonials from './pages/testimonials/Testimonials';
 import TestimonialView from './pages/testimonials/TestimonialView';
 import MeetingDetails from './pages/meetings/MeetingDetails';
 import ViewDoulaPage from './pages/manageDoulas/viewDoula';
+import CreateZoneManager from './pages/zonemanagers/CreateZoneManager'
+import ViewZoneManager from "./pages/zonemanagers/ViewZoneManager";
 
 function PrivaterRoute({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem("adminToken");
@@ -89,6 +91,21 @@ function App() {
             <TestimonialView />
           </PrivaterRoute>
         } />
+         <Route
+          path="/zone-managers/create"
+          element={
+            <PrivaterRoute>
+              <CreateZoneManager />
+            </PrivaterRoute>
+          }/>
+          <Route     
+            path="/zonemanagers/:id"
+            element={
+              <PrivaterRoute>
+                <ViewZoneManager />
+              </PrivaterRoute>
+            }
+          />
       </Routes>
     </BrowserRouter>
   )
