@@ -12,12 +12,22 @@
 }
 
 .pageContent {
-  padding: 24px ;
+  padding: 24px 28px;
   overflow: auto;
-  max-width: 1200px;
-  
 }
-
+/* ===================== Back ===================== */
+.backLink {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  border: none;
+  background: transparent;
+  color: #0A0A0A;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
 /* Header */
 .headerRow {
   display: flex;
@@ -63,8 +73,8 @@
   padding: 10px 16px;
   border-radius: 10px;
   border: none;
-  background: #8335A0;
-  color: #F7EBED;
+  background: #f94355;
+  color: #fff;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -84,7 +94,6 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 100%; 
 }
 
 .searchRow {
@@ -134,7 +143,6 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  width:35%
 }
 
 .filterSelect label {
@@ -142,8 +150,9 @@
   color: #314158;
 }
 
-.filterSelect select {
-  width: 100%;
+.filterSelect select,
+.filterSelect input[type='date'] {
+  width: 190px;
   border-radius: 10px;
   border: 1px solid #e2e8f0;
   padding: 7px 10px;
@@ -180,52 +189,114 @@
   border: 1px solid #e2e8f0;
   color: #0a0a0a;
   cursor: pointer;
-  margin-right: auto;
 }
 
- .tableCard {
+.checkAvailabilityBtn {
+  padding: 8px 14px;
+  border-radius: 9px;
+  border: 1px solid #F7EBED;
+  background: #f8fafc;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  color: #F7EBED;
+  background: #8335A0;
+}
+
+@media (max-width: 768px) {
+  .checkAvailabilityBtn {
+    align-self: stretch;
+  }
+}
+
+
+.availabilityCard .filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 34px;
+}
+
+
+.availabilityCard {
+  margin-top: 10px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.searchBtn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #8335A0;
+  color: #F7EBED;
+  border: none;
+  cursor: pointer;
+
+  align-self: flex-end;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .availabilityCard .filterRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchBtn {
+    align-self: stretch;
+    margin-top: 8px;
+  }
+}
+
+
+.availabilityRow {
+  display: grid;
+  grid-template-columns: 1.4fr 1.6fr 1fr 2fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+
+/* Table card */
+.tableCard {
   background: #ffffff;
   border-radius: 14px;
   border: 1px solid #0000001a;
   padding: 0;
-  overflow-x: auto;
-  width: 1130px;  
-  margin-left:24px; 
-  margin-right:24px        
+  overflow-x: auto; 
 }
-
 
 .tableInner {
   min-width: 880px; 
 }
 
-
 .tableHeader,
 .tableRow {
   display: grid;
-  grid-template-columns: 
-    2fr     /* Name */
-    1.5fr   /* Region */
-    1.8fr   /* Phone Number */
+  grid-template-columns:
+    1.6fr   /* Service */
+    1.6fr   /* Client */
+    1.6fr   /* Doula */
+    1.2fr   /* Region */
+    1.2fr   /* Date */
+    1fr     /* Shift */
     1.2fr   /* Status */
-    0.8fr;  /* Actions */
-  padding: 12px 20px;
-  column-gap: 16px;
-  align-items: center;
-}
+    0.6fr;  /* Actions */
 
+  column-gap: 24px;
+}
+.tableRow > div,
 .tableHeader > div {
   display: flex;
   align-items: center;
-}
-
-.tableRow > div {
-  display: flex;
-  align-items: center;
-  min-height: 22px;
-  padding-left: 5px;
-justify-content: flex-start;
- padding-left: 5px;
+  justify-content: center;
+  text-align: center;
 }
 
 
@@ -239,6 +310,7 @@ justify-content: flex-start;
   background: #f5f6f7;
   border-bottom: 1px solid #0000001a;
   border-radius: 14px 14px 0 0;
+  text-align: center;
 }
 
 /* Rows */
@@ -247,11 +319,7 @@ justify-content: flex-start;
   transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
   border-radius: 10px;
   margin: 2px 2px;
-}
-
-.filterSelect select {
-  max-height: 180px;   
-  overflow-y: auto;
+  padding: 14px 20px;
 }
 
 
@@ -261,6 +329,17 @@ justify-content: flex-start;
   color: #64748b;
 }
 
+/* Cell content */
+.bookingCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bookingId {
+  font-weight: 500;
+  color: #0f172b;
+}
 
 .tableRow > .mainText:first-child {
   font-weight: 600;
@@ -268,18 +347,17 @@ justify-content: flex-start;
 
 .mainText {
   display: flex;
-  
-  justify-content: center; /* 👈 KEY FIX */
+  flex-direction: column;
   gap: 2px;
   color: #0f172b;
   font-size: 14px;
-    font-weight: 600;
-    align-items: center;  
 }
 
+.subMuted {
+  font-size: 11px;
+  color: #94a3b8;
+}
 
-
-/* Status pill */
 .serviceStatusPill {
   font-size: 12px;
   border-radius: 8px;
@@ -288,6 +366,107 @@ justify-content: flex-start;
   font-weight: 500;
 }
 
+.statusPill {
+  font-size: 11px;
+  border-radius: 999px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin:  0 auto;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.statusActive {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.statusCompleted {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.statusCancelled {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Actions */
+.actionsCell {
+  display: flex;
+  justify-content: flex-end;
+  justify-content: center;
+}
+
+.actionWrapper {
+  position: relative;
+}
+
+.iconBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.iconBtn:hover {
+  background: #f1f5f9;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 36px;
+  min-width: 150px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  padding: 6px;
+  z-index: 50;
+}
+
+.dropdownItem {
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 8px 10px;
+  text-align: left;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background: #f8fafc;
+}
+
+.pending {
+  color: #92400e;
+}
+
+.in_progress {
+  color: #1d4ed8;
+}
+
+.completed {
+  color: #047857;
+}
+
+.canceled {
+  color: #b91c1c;
+}
+
+.dropdownItem:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Status pill */
 .statusPill {
   font-size: 11px;
   border-radius: 999px;
@@ -313,28 +492,16 @@ justify-content: flex-start;
   color: #b91c1c;
 }
 
-.actionsCell {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-   gap: 8px; /* spacing between icons */
+.statusPending {
+  background: #fef3c7;
+  color: #92400e;
 }
 
-.iconBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 6px;
-  background: transparent;
+.statusInProgress {
+  background: #ede9fe;
+  color: #5b21b6;
 }
-.iconBtn:hover {
-  background: #f1f5f9;
-}
+
 
 /* Footer / pagination */
 .tableFooter {
@@ -351,7 +518,6 @@ justify-content: flex-start;
   font-size: 12px;
   color: #64748b;
 }
-
 
 .pagination {
   display: flex;
@@ -379,99 +545,70 @@ justify-content: flex-start;
   color: #09090b;
 }
 
+/* Vertical availability list */
+.availabilityColumnList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.availabilityCardItem {
+  padding: 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.availabilityCardItem h4 {
+  margin-bottom: 6px;
+  color: #0f172b;
+}
+
+.availabilityCardItem p {
+  font-size: 13px;
+  color: #475569;
+  margin: 4px 0;
+}
+
+/* ===================== Actions ===================== */
+
+.actionsCell {
+  display: flex;
+  justify-content: center;
+}
 
 .actionWrapper {
   position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.actionDropdown {
-  position: absolute;
-
-  /* 👇 keeps it inside same row */
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 6px 8px;
-  min-width: unset;
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  z-index: 20;
-
-  /* horizontal layout */
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.actionItem {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 18px;
-  color: #0f172a;
-}
-
-.actionItem:hover {
-  background: #f1f5f9;
-}
-.actionItem:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.delete {
-  color: #dc2626;
-}
-
-.delete:hover {
-  background: #fee2e2;
 }
 
 .iconBtn {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 6px;
-  border-radius: 6px;
-}
-
-.iconBtn:hover {
-  background: #f1f5f9;
+  font-size: 16px;
+  color: #64748b;
 }
 
 .dropdown {
   position: absolute;
   right: 0;
-  top: 36px;
-  min-width: 140px;
+  top: 28px;
   background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-  padding: 6px;
-  z-index: 50;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  z-index: 20;
+  min-width: 160px;
 }
 
 .dropdownItem {
   width: 100%;
+  padding: 8px 12px;
+  background: transparent;
   border: none;
-  background: none;
-  padding: 8px 10px;
   text-align: left;
-  border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
 }
 
@@ -479,14 +616,11 @@ justify-content: flex-start;
   background: #f8fafc;
 }
 
-/* Status colors */
-.active {
-  color: #047857;
+.dropdownItem:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.tableRow {
-  position: relative;
-}
 
 @media (max-width: 1024px) {
   .pageContent {
@@ -499,11 +633,11 @@ justify-content: flex-start;
 
   .tableHeader,
   .tableRow {
-    column-gap: 12px;
+    column-gap: 24px;
   }
 
   .tableInner {
-    min-width: 720px;
+    min-width: 820px;
   }
 
   .tableFooter {
@@ -535,14 +669,10 @@ justify-content: flex-start;
   .filterSelect select,
   .filterSelect input[type='date'] {
     width: 100%;
-    box-sizing: border-box;
   }
- .filterSelect select {
-    width: 180px;        /* 👈 REDUCE WIDTH */
-    max-width: 100%;
-  }
+
   .searchInput input {
-    width: 100%;
+    width: 105%;
   }
 
   .resetContainer {
@@ -555,37 +685,18 @@ justify-content: flex-start;
     gap: 8px;
     background: #ffff
   }
-  .tableRow > div,
-  .tableHeader > div {
-    min-height: 44px;   /* smaller row height */
+  .statusPill {
+    font-size: 10px;
+    padding: 4px 10px;
   }
-
-  .mainText {
-    font-size: 13px;
+  @media (max-width: 768px) {
+  .checkAvailabilityBtn {
+    margin-left: 0;      
+    width: 100%;          
+    text-align: center;
+    margin-top: 16px;
   }
-  .filterRow {
-    flex-direction: column;      /* 👈 stack vertically */
-    align-items: stretch;
-    gap: 16px;
-  }
-
-  .filterSelect {
-    width: 100%;                 /* 👈 full width */
-  }
-
-  .filterSelect select {
-    width: 100%;
-  }
-
-  .resetContainer {
-    padding-left: 0;
-    width: 100%;
-  }
-
-  .resetBtn {
-    width: 100%;                 /* 👈 full-width button */
-    justify-content: center;
-  }
+}
 }
 
 @media (max-width: 480px) {
@@ -613,21 +724,5 @@ justify-content: flex-start;
   .pageBtn {
     padding: 5px 10px;
     font-size: 12px;
-  }
-  .tableRow > div,
-  .tableHeader > div {
-    min-height: 40px;
-  }
-
-  .iconBtn {
-    padding: 4px;
-  }
-  
-.filtersCard {
-    padding: 16px;
-  }
-
-  .filterRow {
-    gap: 12px;
   }
 }

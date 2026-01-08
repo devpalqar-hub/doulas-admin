@@ -1,0 +1,265 @@
+
+/* ================= LAYOUT (REQUIRED) ================= */
+
+.root {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.contentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pageContent {
+  padding: 24px 28px;
+  overflow-y: auto;
+}
+
+/* ================= PAGE CONTAINER ================= */
+
+.page {
+  max-width: 1130px;
+  margin: 0 auto;
+}
+
+/* Card (replaces modal) */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* ================= HEADER ================= */
+
+.header {
+  margin-bottom: 20px;
+}
+
+.header h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* ================= FORM ================= */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Row layout */
+.row {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+/* ================= FIELD ================= */
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.field input {
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  padding: 9px 12px;
+  font-size: 14px;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: #8335a0;
+}
+
+/* ================= MULTI SELECT ================= */
+
+.multiSelectInput {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  min-height: 40px;
+  background: #ffffff;
+  cursor: text;
+}
+
+.multiInput {
+  border: none;
+  outline: none;
+  flex: 1;
+  min-width: 120px;
+  font-size: 14px;
+  padding: 4px;
+}
+
+/* Selected region chip */
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ede9fe;
+  color: #5b21b6;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.chipRemove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: #5b21b6;
+}
+
+/* ================= DROPDOWN ================= */
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 180px;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-top: 4px;
+  z-index: 20;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.dropdownItem {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdownItem:hover {
+  background: #f1f5f9;
+}
+
+.dropdownItemMuted {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.cancel {
+  background: #f1f5f9;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.submit {
+  background: #8335a0;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+/* ================= FILE INPUT LIKE OTHER FIELDS ================= */
+
+.hiddenFileInput {
+  display: none;
+}
+
+.fileInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;               /* space between button & text */
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 6px 10px;
+  background: #ffffff;
+
+  height: 40px;            /* same as other inputs */
+}
+
+.fileBtn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: #8335a0;
+
+  color: #ffffff !important; 
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  flex-shrink: 0;          /* 👈 prevents shrinking */
+}
+
+.fileBtn:hover {
+  opacity: 0.9;
+}
+
+.fileText {
+  font-size: 14px;
+  color: #64748b;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 1;                 /* 👈 takes remaining space */
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 480px) {
+  .pageContent {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+}

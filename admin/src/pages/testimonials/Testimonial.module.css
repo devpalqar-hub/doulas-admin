@@ -1,0 +1,357 @@
+.root {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.contentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pageContent {
+  padding: 24px 28px;
+  overflow: auto;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #0F172B;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #62748E;
+  margin-top: 4px;
+  margin-bottom: 20px;
+}
+
+.filterCard {
+  background: #ffffff;
+  border: 1px solid #0000001A;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.filterInput {
+  width: 180px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  font-size: 14px;
+  color: #314158;
+}
+
+.resetBtn {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  color: #0A0A0A;
+}
+
+/* STATS */
+
+.statsRow {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.statBox {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px 18px;
+  border: 1px solid #0000001A;
+  width: 200px;
+  font-size: 14px;
+  color: #314158;
+}
+
+.statBox span {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 6px;
+  color: #0F172B;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #0000001A;
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #65a5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.clientInfo strong {
+  font-size: 16px;
+  color: #0F172B;
+}
+
+.clientInfo p {
+  margin: 0;
+  font-size: 13px;
+  color: #62748E;
+}
+
+.ratingRow {
+  font-size: 18px;
+  color: #facc15; 
+  margin-top: -4px;
+}
+
+.reviewText {
+  font-size: 14px;
+  color: #314158;
+  line-height: 20px;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tag {
+  background: #ECEEF2;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #030213;
+  font-weight: 500;
+}
+
+.eyeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #475569;
+}
+
+.dateText {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* -------- Tablets (≤ 1024px) -------- */
+@media (max-width: 1024px) {
+  .pageContent {
+    padding: 20px;
+  }
+
+  .statsRow {
+    flex-wrap: wrap;
+  }
+
+  .statBox {
+    width: calc(50% - 9px);
+  }
+
+  .filterCard {
+    gap: 12px;
+  }
+
+  .filterInput {
+    width: 160px;
+  }
+
+  .cardGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* -------- Small Tablets & Large Phones (≤ 768px) -------- */
+@media (max-width: 768px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .filterCard {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filterInput {
+    width: 100%;
+  }
+
+  .resetBtn {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .statsRow {
+    flex-direction: column;
+  }
+
+  .statBox {
+    width: 100%;
+  }
+
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -------- Mobile (≤ 480px) -------- */
+@media (max-width: 480px) {
+  .pageContent {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .cardHeader {
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .clientInfo strong {
+    font-size: 14px;
+  }
+
+  .clientInfo p {
+    font-size: 12px;
+  }
+
+  .ratingRow {
+    font-size: 16px;
+  }
+
+  .reviewText {
+    font-size: 13px;
+  }
+
+  .cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .eyeBtn {
+    align-self: flex-end;
+  }
+}
+
+/* ===================== Pagination ===================== */
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.pagination button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172b;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #c7d2fe;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination span {
+  font-size: 14px;
+  color: #62748e;
+  font-weight: 500;
+}
+
+/* ===================== Responsive ===================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .pagination {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .pagination {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pagination button {
+    width: 100%;
+    text-align: center;
+  }
+}

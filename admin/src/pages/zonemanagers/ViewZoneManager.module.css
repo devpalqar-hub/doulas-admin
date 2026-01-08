@@ -1,0 +1,125 @@
+/* ================= ROOT LAYOUT ================= */
+
+.root {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* Main content next to sidebar */
+.contentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page padding */
+.pageContent {
+  padding: 24px 28px;
+}
+
+/* ================= CARD ================= */
+
+.card {
+  max-width: 1128px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Title */
+.card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 24px;
+}
+
+/* ================= ROWS ================= */
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 16px;
+}
+
+/* Label */
+.row span {
+  font-size: 14px;
+  color: #64748b;
+  min-width: 120px;
+}
+
+/* Value */
+.row strong {
+  font-size: 15px;
+  font-weight: 500;
+  color: #0f172a;
+  text-align: right;
+  max-width: 420px;
+  line-height: 1.4;
+}
+
+/* Remove border from last row */
+.row:last-of-type {
+  border-bottom: none;
+}
+.noDoula {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 13px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+
+/* ================= FOOTER ================= */
+
+.footer {
+  margin-top: 28px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.backBtn {
+  background: #8335A0;; /* same purple */
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius:10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+
+
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 640px) {
+  .card {
+    padding: 20px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .row strong {
+    text-align: left;
+    max-width: 100%;
+  }
+}

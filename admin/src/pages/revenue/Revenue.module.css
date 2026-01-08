@@ -1,0 +1,294 @@
+
+.root {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.contentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pageContent {
+  padding: 24px 28px;
+  overflow-y: auto;
+}
+
+/* =====================
+   HEADER
+===================== */
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #0f172b;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #62748e;
+}
+
+/* =====================
+   FILTERS
+===================== */
+
+.filtersCard {
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #0000001a;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: flex-end;
+}
+
+.filterSelect {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.selectWrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 12px;
+  top: 55%;
+  transform: translateY(-10%);
+  font-size: 20px;
+  color: #64748b;
+  pointer-events: none;
+}
+
+.filterSelect select option:disabled {
+  color: #94a3b8;
+}
+
+
+.filterSelect label {
+  font-size: 14px;
+  color: #314158;
+}
+
+.filterSelect input {
+  width: 200px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  padding: 8px 10px;
+  font-size: 13px;
+  background: #ffffff;
+}
+
+.filterSelect input:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+.filterSelect select {
+  width: 200px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  padding: 8px 36px 8px 10px; 
+  font-size: 13px;
+  background-color: #ffffff;
+  color: #0f172b;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+.filterSelect select:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+.filterSelect select:hover {
+  border-color: #c7d2fe;
+}
+
+.resetContainer {
+  padding-left: 10px;
+}
+
+.resetBtn {
+  padding: 8px 16px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+}
+
+/* =====================
+   REVENUE CARD
+===================== */
+
+.revenueCard {
+  background: linear-gradient(
+    135deg,
+    #8335A0 0%,
+    #B86BCB 45%,
+    #F7EBED 100%
+  );
+  border-radius: 18px;
+  padding: 36px 40px;
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(131, 53, 160, 0.28);
+  margin-bottom: 28px;
+}
+
+
+.revenueLabel {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+.revenueAmount {
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.revenueHint {
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.loading {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* =====================
+   PAGINATION FOOTER
+===================== */
+
+.tableFooter {
+  padding: 12px 20px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #0000001a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rowsInfo {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pageBtn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  font-size: 13px;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pageIndicator {
+  font-size: 14px;
+  font-weight: 500;
+  color: #09090b;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+
+@media (max-width: 1024px) {
+  .pageContent {
+    padding: 20px;
+  }
+
+  .filterRow {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pageContent {
+    padding: 16px;
+  }
+
+  .filterRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filterSelect input {
+    width: 100%;
+  }
+
+  .resetContainer {
+    padding-left: 0;
+  }
+
+  .revenueCard {
+    padding: 28px 24px;
+  }
+
+  .revenueAmount {
+    font-size: 32px;
+  }
+
+  .tableFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .filterSelect select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .revenueAmount {
+    font-size: 28px;
+  }
+}

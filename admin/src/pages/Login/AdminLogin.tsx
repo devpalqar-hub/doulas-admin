@@ -58,7 +58,7 @@ const AdminLogin = () => {
     <div className={styles.container}>
       {/* Left */}
       <div className={styles.leftSection}>
-        <img className={styles.logoCircle} src="/D-icon.png" />
+        <img className={styles.logoCircle} src="/doula-branding.png" />
         <h2>Doula Admin Panel</h2>
         <p>Secure administrative access for system management.</p>
 
@@ -104,7 +104,7 @@ const AdminLogin = () => {
             </>
           )}
 
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading} className={styles.loginBtn}>
             {loading
               ? "Processing..."
               : otpSent
@@ -113,7 +113,7 @@ const AdminLogin = () => {
           </button>
 
           <div className={styles.footerNote}>
-            <LuLock size={18} />
+            <span className={styles.lockIcon}><LuLock size={18}/></span>
             Admin access is securely encrypted
           </div>
         </form>

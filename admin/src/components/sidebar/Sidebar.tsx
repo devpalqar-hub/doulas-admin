@@ -8,6 +8,7 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineEventAvailable } from "react-icons/md";
 import { LuUsers } from "react-icons/lu";
 import { HiOutlineVideoCamera } from "react-icons/hi";
+import { GiTakeMyMoney, GiWorld } from "react-icons/gi";
 import { FiBookOpen, FiMessageSquare } from "react-icons/fi";
 
 const Sidebar = () => {
@@ -73,6 +74,30 @@ const Sidebar = () => {
             <LuLayoutDashboard size={20} /> Dashboard
           </NavLink>
 
+          <NavLink to="/revenue" className={({ isActive }) =>
+            `${styles.item} ${isActive ? styles.active : ""}`
+          }>
+            <GiTakeMyMoney size={20} /> Revenue
+          </NavLink>
+
+          <NavLink to="/regions" className={({ isActive }) =>
+            `${styles.item} ${isActive ? styles.active : ""}`
+          }>
+            <GiWorld size={20} /> Regions
+          </NavLink>
+
+          <NavLink to="/bookings" className={({ isActive }) =>
+            `${styles.item} ${isActive ? styles.active : ""}`
+          }>
+            <FiBookOpen size={20} /> Bookings
+          </NavLink>
+
+          <NavLink to="/meetings" className={({ isActive }) =>
+            `${styles.item} ${isActive ? styles.active : ""}`
+          }>
+            <HiOutlineVideoCamera size={20} /> Appointments
+          </NavLink>
+
           <NavLink to="/zonemanagers" className={({ isActive }) =>
             `${styles.item} ${isActive ? styles.active : ""}`
           }>
@@ -83,18 +108,6 @@ const Sidebar = () => {
             `${styles.item} ${isActive ? styles.active : ""}`
           }>
             <LuUsers size={20} /> Manage Doulas
-          </NavLink>
-
-          <NavLink to="/meetings" className={({ isActive }) =>
-            `${styles.item} ${isActive ? styles.active : ""}`
-          }>
-            <HiOutlineVideoCamera size={20} /> Appointments
-          </NavLink>
-
-          <NavLink to="/bookings" className={({ isActive }) =>
-            `${styles.item} ${isActive ? styles.active : ""}`
-          }>
-            <FiBookOpen size={20} /> Bookings
           </NavLink>
 
           <NavLink to="/schedules" className={({ isActive }) =>
