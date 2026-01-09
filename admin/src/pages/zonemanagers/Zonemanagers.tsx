@@ -1,11 +1,11 @@
 import styles from "./Zonemanagers.module.css";
-import { FiSearch, FiEye, FiTrash2 } from "react-icons/fi";
+import { FiSearch, FiEye,} from "react-icons/fi";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
-
+import { MdToggleOn, MdToggleOff } from "react-icons/md";
 
 const Zonemanagers = () => {
   const navigate = useNavigate();
@@ -13,11 +13,11 @@ const Zonemanagers = () => {
   const [zoneManagers, setZoneManagers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  // regions (for filter)
-const [allRegions, setAllRegions] = useState<any[]>([]);
-const [selectedRegion, setSelectedRegion] = useState("");
-const [loadingRegions, setLoadingRegions] = useState(false);
 
+  // regions (for filter)
+  const [allRegions, setAllRegions] = useState<any[]>([]);
+  const [selectedRegion, setSelectedRegion] = useState("");
+  const [loadingRegions, setLoadingRegions] = useState(false);
 
   // filters
   const [search, setSearch] = useState("");
@@ -30,45 +30,61 @@ const [loadingRegions, setLoadingRegions] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
 
   // ================= DELETE =================
-  const handleDeleteZoneManager = async (id: string) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this Zone Manager?"
-    );
-    if (!confirmDelete) return;
+ // ================= TOGGLE USER STATUS =================
+const handleToggleStatus = async (id: string, currentStatus: boolean) => {
+  const confirmMsg = currentStatus
+    ? "Are you sure you want to deactivate this Zone Manager?"
+    : "Are you sure you want to activate this Zone Manager?";
 
-    try {
-      await api.delete(`/zonemanager/${id}`);
-      fetchZoneManagers();
-    } catch (err) {
-      console.error(err);
-      alert("Failed to delete Zone Manager");
-    }
-  };
+  const confirmAction = window.confirm(confirmMsg);
+  if (!confirmAction) return;
 
-  useEffect(() => {
-  const fetchRegions = async () => {
-    try {
-      setLoadingRegions(true);
-      const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/regions`
-      );
-      const data = await res.json();
-      console.log("region",data)
-
-      if (data.status === "success") {
-        setAllRegions(data.data);
+  try {
+    await api.patch(
+      "/user/change/status",
+      {
+        userId: id,
+        is_active: !currentStatus, // 👈 toggle
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    } catch (err) {
-      console.error("Failed to fetch regions", err);
-    } finally {
-      setLoadingRegions(false);
-    }
-  };
+    );
 
-  fetchRegions();
-}, []);
+    fetchZoneManagers(); // refresh list
+  } catch (err) {
+    console.error(err);
+    alert("Failed to update user status");
+  }
+};
 
-  // ================= FETCH ZONE MANAGERS (CORRECT API) =================
+
+  // ================= FETCH REGIONS =================
+  useEffect(() => {
+    const fetchRegions = async () => {
+      try {
+        setLoadingRegions(true);
+        const res = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/regions`
+        );
+        const data = await res.json();
+
+        if (data.status === "success") {
+          setAllRegions(data.data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch regions", err);
+      } finally {
+        setLoadingRegions(false);
+      }
+    };
+
+    fetchRegions();
+  }, []);
+
+  // ================= FETCH ZONE MANAGERS =================
   const fetchZoneManagers = async () => {
     try {
       setLoading(true);
@@ -94,14 +110,14 @@ const [loadingRegions, setLoadingRegions] = useState(false);
       setLoading(false);
     }
   };
- useEffect(() => {
-  fetchZoneManagers();
-}, [page, search, status, selectedRegion]);
 
-  
   useEffect(() => {
-  setPage(1);
-}, [search, status, selectedRegion]);
+    fetchZoneManagers();
+  }, [page, search, status, selectedRegion]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [search, status, selectedRegion]);
 
   return (
     <div className={styles.root}>
@@ -127,7 +143,7 @@ const [loadingRegions, setLoadingRegions] = useState(false);
           </div>
 
           {/* FILTERS */}
-          <div className={styles.filtersCard}> 
+          <div className={styles.filtersCard}>
             <div className={styles.searchRow}>
               <div className={styles.searchInput}>
                 <span className={styles.searchIcon} >
@@ -140,58 +156,56 @@ const [loadingRegions, setLoadingRegions] = useState(false);
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
-            </div>         
+            </div>
+
             <div className={styles.filterRow}>
-                  {/* REGION FILTER */}
-                  <div className={styles.filterSelect}>
-                    <label>Region</label>
-                    <select
-                        value={selectedRegion}
-                        onChange={(e) => setSelectedRegion(e.target.value)}
-                      >
-                        <option value="">All Regions</option>
+              <div className={styles.filterSelect}>
+                <label>Region</label>
+                <select
+                  value={selectedRegion}
+                  onChange={(e) => setSelectedRegion(e.target.value)}
+                >
+                  <option value="">All Regions</option>
+                  {loadingRegions ? (
+                    <option>Loading...</option>
+                  ) : (
+                    allRegions.map((r) => (
+                      <option key={r.regionId} value={r.regionId}>
+                        {r.regionName}
+                      </option>
+                    ))
+                  )}
+                </select>
+              </div>
 
-                        {loadingRegions ? (
-                          <option>Loading...</option>
-                        ) : (
-                          allRegions.map((r) => (
-                            <option key={r.regionId} value={r.regionId}>
-                              {r.regionName}
-                            </option>
-                          ))
-                        )}
-                      </select>
-                    </div>
-                  {/* STATUS FILTER */}
-                  <div className={styles.filterSelect}>
-                    <label>Status</label>
-                    <select
-                      value={status}
-                      onChange={(e) => setStatus(e.target.value)}
-                    >
-                      <option value="">All</option>
-                      <option value="true">Active</option>
-                      <option value="false">Inactive</option>
-                    </select>
-                  </div>
+              <div className={styles.filterSelect}>
+                <label>Status</label>
+                <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                >
+                  <option value="">All</option>
+                  <option value="true">Active</option>
+                  <option value="false">Inactive</option>
+                </select>
+              </div>
 
-                  <div className={styles.resetContainer}>
-                    <button
-                      className={styles.resetBtn}
-                      onClick={() => {
-                        setSearch("");
-                        setStatus("");
-                        setSelectedRegion("");
-                      }}
-                    >
-                      Reset
-                    </button>
-                  </div>
-                </div>
-             </div>
+              <div className={styles.resetContainer}>
+                <button
+                  className={styles.resetBtn}
+                  onClick={() => {
+                    setSearch("");
+                    setStatus("");
+                    setSelectedRegion("");
+                  }}
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* TABLE */}
+          {/* ================= DESKTOP TABLE ================= */}
           <div className={styles.tableCard}>
             <div className={styles.tableInner}>
               <div className={styles.tableHeader}>
@@ -212,16 +226,10 @@ const [loadingRegions, setLoadingRegions] = useState(false);
               {zoneManagers.map((zm) => (
                 <div key={zm.userId} className={styles.tableRow}>
                   <div className={styles.mainText}>{zm.name}</div>
-
-                  {/* ✅ REGIONS NOW WORK */}
                   <div className={styles.mutedCell}>
-                    {zm.regions && zm.regions.length > 0
-                      ? zm.regions.join(", ")
-                      : "—"}
+                    {zm.regions?.length ? zm.regions.join(", ") : "—"}
                   </div>
-
                   <div>{zm.phone}</div>
-
                   <div>
                     <span
                       className={`${styles.statusPill} ${
@@ -233,25 +241,31 @@ const [loadingRegions, setLoadingRegions] = useState(false);
                       {zm.is_active ? "Active" : "Inactive"}
                     </span>
                   </div>
-
                   <div className={styles.actionsCell}>
                     <button
-                        className={styles.actionItem}
-                        onClick={() => navigate(`/zonemanagers/${zm.userId}`)}>
-                        <FiEye />
-                      </button>
-                    <button
-                      className={`${styles.actionItem} ${styles.delete}`}
-                      onClick={() => handleDeleteZoneManager(zm.userId)}
+                      className={styles.actionItem}
+                      onClick={() => navigate(`/zonemanagers/${zm.userId}`)}
                     >
-                      <FiTrash2 />
+                      <FiEye />
                     </button>
+                    <button
+  className={styles.actionItem}
+  onClick={() => handleToggleStatus(zm.userId, zm.is_active)}
+  title={zm.is_active ? "Deactivate user" : "Activate user"}
+>
+  {zm.is_active ? (
+    <MdToggleOn size={22} color="#16a34a" />   // Active → green
+  ) : (
+    <MdToggleOff size={22} color="#dc2626" /> // Inactive → red
+  )}
+</button>
+
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* FOOTER */}
+            {/* ✅ SINGLE FOOTER (DESKTOP + MOBILE) */}
             <div className={styles.tableFooter}>
               <div className={styles.rowsInfo}>
                 Showing {(page - 1) * limit + 1}–
@@ -281,8 +295,68 @@ const [loadingRegions, setLoadingRegions] = useState(false);
               </div>
             </div>
           </div>
+
+          {/* ================= MOBILE CARD VIEW ================= */}
+          <div className={styles.mobileCards}>
+            {zoneManagers.map((zm) => (
+              <div key={zm.userId} className={styles.mobileCard}>
+                <div className={styles.cardRow}>
+                  <span className={styles.cardLabel}>Name</span>
+                  <span className={styles.cardValue}>{zm.name}</span>
+                </div>
+
+                <div className={styles.cardRow}>
+                  <span className={styles.cardLabel}>Region</span>
+                  <span className={styles.cardValue}>
+                    {zm.regions?.length ? zm.regions.join(", ") : "—"}
+                  </span>
+                </div>
+
+                <div className={styles.cardRow}>
+                  <span className={styles.cardLabel}>Phone</span>
+                  <span className={styles.cardValue}>{zm.phone}</span>
+                </div>
+
+                <div className={styles.cardRow}>
+                  <span className={styles.cardLabel}>Status</span>
+                  <span
+                    className={`${styles.statusPill} ${
+                      zm.is_active
+                        ? styles.statusActive
+                        : styles.statusCancelled
+                    }`}
+                  >
+                    {zm.is_active ? "Active" : "Inactive"}
+                  </span>
+                </div>
+
+                <div className={styles.cardActions}>
+                  <button
+                    className={styles.actionItem}
+                    onClick={() => navigate(`/zonemanagers/${zm.userId}`)}
+                  >
+                    <FiEye />
+                  </button>
+                 <button
+                    className={styles.actionItem}
+                    onClick={() => handleToggleStatus(zm.userId, zm.is_active)}
+                    title={zm.is_active ? "Deactivate user" : "Activate user"}
+                  >
+                    {zm.is_active ? (
+                      <MdToggleOn size={22} color="#16a34a" />   // Active → green
+                    ) : (
+                      <MdToggleOff size={22} color="#dc2626" /> // Inactive → red
+                    )}
+                  </button>
+
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* ================= END MOBILE ================= */}
         </div>
       </div>
+    </div>
   );
 };
 
