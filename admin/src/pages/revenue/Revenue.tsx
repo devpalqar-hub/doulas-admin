@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import styles from "./Revenue.module.css";
-
 import { fetchAdminRevenue } from "../../services/revenue.service";
 import { fetchServices, type Service } from "../../services/doula.service";
 import { fetchAdminDoulas, type DoulaListItem } from "../../services/doula.service";
@@ -11,7 +10,6 @@ import { useToast } from "../../shared/toast/ToastContext";
 
 const Revenue = () => {
   const { showToast } = useToast();
-
   /* ================= FILTERS ================= */
   const [doulaId, setDoulaId] = useState("");
   const [regionId, setRegionId] = useState("");
@@ -145,7 +143,7 @@ const Revenue = () => {
                 >
                   <option value="">All Doulas</option>
                   {doulas.map((d) => (
-                    <option key={d.userId} value={d.userId}>
+                    <option key={d.userId} value={d.profileId}>
                       {d.name}
                     </option>
                   ))}
@@ -167,7 +165,6 @@ const Revenue = () => {
                   ))}
                 </select>
               </div>
-
 
               <div className={`${styles.filterSelect} ${styles.selectWrapper}`}>
                 <label>Service</label>
