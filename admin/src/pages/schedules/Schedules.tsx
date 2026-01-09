@@ -146,11 +146,11 @@ const getNextStatuses = (current: string) => {
     case "PENDING":
       return ["IN_PROGRESS", "COMPLETED", "CANCELED"];
     case "IN_PROGRESS":
-      return ["COMPLETED", "CANCELED"];
+      return ["COMPLETED", "CANCELED", "PENDING"];
     case "COMPLETED":
-      return ["PENDING", "CANCELED"];
+      return ["PENDING", "CANCELED", "IN_PROGRESS"];
     case "CANCELED":
-      return ["PENDING", "IN_PROGRESS"];
+      return ["PENDING", "IN_PROGRESS", "COMPLETED"];
     default:
       return [];
   }
