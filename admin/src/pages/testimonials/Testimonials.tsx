@@ -123,7 +123,7 @@ const Testimonials = () => {
               setPage(1);
             }}
           >
-            <option value="">Doula</option>
+            <option value="">All Doulas</option>
             {doulas.map((d) => (
               <option key={d.userId} value={d.userId}>
                 {d.name}
@@ -139,7 +139,7 @@ const Testimonials = () => {
                 setPage(1);
               }}
             >
-              <option value="">Service</option>
+              <option value="">All Services</option>
               {services.map((s) => (
                 <option key={s.id} value={s.id}>
                   {s.name}
@@ -155,7 +155,7 @@ const Testimonials = () => {
                 setPage(1);
               }}
             >
-              <option value="">Rating</option>
+              <option value="">All Ratings</option>
               {[5, 4, 3, 2, 1].map((r) => (
                 <option key={r} value={r}>
                   {r} Stars

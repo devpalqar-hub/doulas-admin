@@ -9,11 +9,12 @@ import {
   updateRegion,
 } from "../../services/region.service";
 import { FaArrowLeft } from "react-icons/fa";
+import { useToast } from "../../shared/toast/ToastContext";
 
 const EditRegion = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const {showToast} = useToast();
   const [form, setForm] = useState({
     regionName: "",
     pincode: "",
@@ -42,15 +43,39 @@ const EditRegion = () => {
     });
     }, [id]);
 
+const isFormValid = (): boolean => {
+  return [
+    form.regionName,
+    form.pincode,
+    form.district,
+    form.state,
+    form.country,
+    form.latitude,
+    form.longitude,
+  ].every((field) => field.trim() !== "");
+};
 
   const handleSubmit = async () => {
-    if (id) {
-      await updateRegion(id, form);
-    } else {
-      await createRegion(form);
+    if (!isFormValid()) {
+      showToast("Fill all fields before submitting", "error");
+      return;
     }
-    navigate("/regions");
+
+    try {
+      if (id) {
+        await updateRegion(id, form);
+        showToast("Region updated successfully", "success");
+      } else {
+        await createRegion(form);
+        showToast("Region created successfully", "success");
+      }
+      navigate("/regions");
+    } catch (err) {
+      console.error(err);
+      showToast("Failed to save region", "error");
+    }
   };
+
 
   return (
     <div className={styles.root}>
@@ -69,48 +94,62 @@ const EditRegion = () => {
           <h2>{id ? "Edit Region" : "Create Region"}</h2>
 
           <div className={styles.formGrid}>
+            <div className={styles.field}>
+              <h5>Region</h5>
+              <input
+              placeholder="Region Name"
+              value={form.regionName}
+              onChange={(e) => setForm({ ...form, regionName: e.target.value })}
+              />
+            </div>
+            <div className={styles.field}>
+              <h5>Pincode</h5>
+              <input
+                placeholder="Pincode"
+                value={form.pincode}
+                onChange={(e) => setForm({ ...form, pincode: e.target.value })}
+                />
+            </div>
+            <div className={styles.field}>
+              <h5>District</h5>
+              <input
+                placeholder="District"
+                value={form.district}
+                onChange={(e) => setForm({ ...form, district: e.target.value })}
+               />
+            </div>
+            <div className={styles.field}>
+              <h5>State</h5>
+              <input
+              placeholder="State"
+              value={form.state}
+              onChange={(e) => setForm({ ...form, state: e.target.value })}
+              />
+            </div>
+            <div className={styles.field}>
+              <h5>Country</h5>
+                <input
+                placeholder="Country"
+                value={form.country}
+                onChange={(e) => setForm({ ...form, country: e.target.value })}
+                />
+            </div>
+            <div className={styles.field}>
+              <h5>Latitude</h5>
             <input
-            placeholder="Region Name"
-            value={form.regionName}
-            onChange={(e) => setForm({ ...form, regionName: e.target.value })}
+              placeholder="Latitude"
+              value={form.latitude}
+              onChange={(e) => setForm({ ...form, latitude: e.target.value })}
             />
-
-            <input
-            placeholder="Pincode"
-            value={form.pincode}
-            onChange={(e) => setForm({ ...form, pincode: e.target.value })}
-            />
-
-            <input
-            placeholder="District"
-            value={form.district}
-            onChange={(e) => setForm({ ...form, district: e.target.value })}
-            />
-
-            <input
-            placeholder="State"
-            value={form.state}
-            onChange={(e) => setForm({ ...form, state: e.target.value })}
-            />
-
-            <input
-            placeholder="Country"
-            value={form.country}
-            onChange={(e) => setForm({ ...form, country: e.target.value })}
-            />
-
-            <input
-            placeholder="Latitude"
-            value={form.latitude}
-            onChange={(e) => setForm({ ...form, latitude: e.target.value })}
-            />
-
-            <input
-            placeholder="Longitude"
-            value={form.longitude}
-            onChange={(e) => setForm({ ...form, longitude: e.target.value })}
-            />
-
+            </div>
+            <div className={styles.field}>
+              <h5>Longitude</h5>
+              <input
+                placeholder="Longitude"
+                value={form.longitude}
+                onChange={(e) => setForm({ ...form, longitude: e.target.value })}
+                />
+            </div>
 
             <label className={styles.toggleRow}>
               <input

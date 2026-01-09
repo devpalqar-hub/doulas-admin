@@ -51,7 +51,9 @@
   cursor: pointer;
 }
 
-
+.field h5{
+  padding-bottom: 10px;
+}
 .toggleRow {
   grid-column: span 2;
   display: flex;

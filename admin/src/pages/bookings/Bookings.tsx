@@ -115,6 +115,7 @@ const Bookings = () => {
 
   const resetFilters = () => {
     setSearch("");
+    setRegionId("")
     setServiceId("");
     setStatus("");
     setStartDate("");
