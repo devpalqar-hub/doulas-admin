@@ -145,11 +145,11 @@ const getNextBookingStatuses = (current: string) => {
     case "PENDING":
       return ["ACTIVE", "COMPLETED", "CANCELED"];
     case "ACTIVE":
-      return ["COMPLETED", "CANCELED"];
+      return ["COMPLETED", "CANCELED", "PENDING"];
     case "COMPLETED":
-      return [];
+      return ["ACTIVE", "CANCELED", "PENDING"];
     case "CANCELED":
-      return ["PENDING"];
+      return ["PENDING", "ACTIVE", "COMPLETED"];
     default:
       return [];
   }

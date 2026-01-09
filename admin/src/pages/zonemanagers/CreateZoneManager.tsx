@@ -4,16 +4,18 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import api from "../../services/api";
+import { useToast } from "../../shared/toast/ToastContext";
 
 const CreateZoneManager = () => {
   const navigate = useNavigate();
-
+  const { showToast } = useToast();
   // form states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const [image, setImage] = useState<File | null>(null);
-
+  
   // regions
   const [regions, setRegions] = useState<any[]>([]);
   const [selectedRegions, setSelectedRegions] = useState<any[]>([]);
@@ -63,6 +65,15 @@ const CreateZoneManager = () => {
       alert("Please fill all required fields");
       return;
     }
+    if (phone.length !== 10) {
+    alert("Please enter a valid 10-digit phone number");
+    return;
+  }
+
+    if (!isValidEmail(email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
 
     try {
       setLoading(true);
@@ -81,13 +92,28 @@ const CreateZoneManager = () => {
       }
 
       await api.post("/zonemanager", formData);
+      showToast("Zone Manager created successfully", "success");  
       navigate("/zonemanagers");
     } catch (err) {
       console.error(err);
-      alert("Failed to create Zone Manager");
+      showToast("Failed to create Zone Manager", "error");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const value = e.target.value.replace(/\D/g, ""); 
+  setPhone(value);
+
+  if (value.length > 0 && value.length < 10) {
+    setPhoneError("Phone number must be 10 digits");
+  } else {
+    setPhoneError("");
+  }
+  };
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
   return (
@@ -131,9 +157,16 @@ const CreateZoneManager = () => {
                   <div className={styles.field}>
                     <label>Phone Number</label>
                     <input
+                      type="tel"
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      maxLength={10}
+                      placeholder="Enter 10-digit phone number"
+                      onChange={handlePhoneChange}
                     />
+
+                    {phoneError && (
+                      <span className={styles.errorText}>{phoneError}</span>
+                    )}
                   </div>
 
                   {/* REGION MULTI SELECT */}
