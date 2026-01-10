@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import AdminLogin from './pages/Login/AdminLogin'
 import Dashboard from './pages/dashboard/Dashboard';
 import Zonemanagers from './pages/zonemanagers/Zonemanagers';
@@ -17,117 +17,48 @@ import ViewZoneManager from "./pages/zonemanagers/ViewZoneManager";
 import Regions from './pages/regions/Regions';
 import EditRegion from './pages/regions/EditRegion';
 
-function PrivaterRoute({ children }: { children: React.ReactNode }) {
+const PrivateRoute = () => {
   const token = localStorage.getItem("adminToken");
-  return token ? children : <Navigate to="/" replace />;
-}
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <Outlet />;
+};
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<AdminLogin />} />
+    <Routes>
+      {/* Public */}
+      <Route path="/" element={<AdminLogin />} />
 
-        <Route path='/dashboard' element={
-          <PrivaterRoute>
-            <Dashboard />
-          </PrivaterRoute>
-        } />
+      {/* Protected */}
+      <Route element={<PrivateRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/zonemanagers" element={<Zonemanagers />} />
+        <Route path="/zonemanagers/:id" element={<ViewZoneManager />} />
+        <Route path="/zone-managers/create" element={<CreateZoneManager />} />
 
-        <Route path='/zonemanagers' element={
-          <PrivaterRoute>
-            <Zonemanagers />
-          </PrivaterRoute>
-        } />
+        <Route path="/doulas" element={<ManageDoulas />} />
+        <Route path="/doulas/:id" element={<ViewDoulaPage />} />
 
-        <Route path='/doulas' element={
-          <PrivaterRoute>
-            <ManageDoulas />
-          </PrivaterRoute>
-        } />
+        <Route path="/regions" element={<Regions />} />
+        <Route path="/regions/create" element={<EditRegion />} />
+        <Route path="/regions/:id" element={<EditRegion />} />
 
-        <Route path='/doulas/:id' element={
-          <PrivaterRoute>
-            <ViewDoulaPage />
-          </PrivaterRoute>
-        } />
+        <Route path="/bookings" element={<Bookings />} />
+        <Route path="/revenue" element={<Revenue />} />
 
-        <Route path='/regions' element={
-          <PrivaterRoute>
-            <Regions />
-          </PrivaterRoute>
-        } />
+        <Route path="/meetings" element={<Meetings />} />
+        <Route path="/meetings/:id" element={<MeetingDetails />} />
 
-        <Route path='/regions/:id' element={
-          <PrivaterRoute>
-            <EditRegion />
-          </PrivaterRoute>
-        } />
-
-        <Route path='/regions/create' element={
-          <PrivaterRoute>
-            <EditRegion />
-          </PrivaterRoute>
-        } />
-        
-        <Route path='/bookings' element={
-          <PrivaterRoute>
-            <Bookings />
-          </PrivaterRoute>
-        } />
-
-        <Route path='/revenue' element={
-          <PrivaterRoute>
-            <Revenue />
-          </PrivaterRoute>
-        } />
-
-        <Route path='/meetings' element={
-          <PrivaterRoute>
-            <Meetings />
-          </PrivaterRoute>
-        } />
-
-        <Route path='/meetings/:id' element={
-          <PrivaterRoute>
-            <MeetingDetails />
-          </PrivaterRoute>
-        } />
-
-        <Route path='/schedules' element={
-          <PrivaterRoute>
-            <Schedules />
-          </PrivaterRoute>
-        } />
-
-        <Route path='/testimonials' element={
-          <PrivaterRoute>
-            <Testimonials />
-          </PrivaterRoute>
-        } />
-
-        <Route path='/testimonials/:id' element={
-          <PrivaterRoute>
-            <TestimonialView />
-          </PrivaterRoute>
-        } />
-         <Route
-          path="/zone-managers/create"
-          element={
-            <PrivaterRoute>
-              <CreateZoneManager />
-            </PrivaterRoute>
-          }/>
-          <Route     
-            path="/zonemanagers/:id"
-            element={
-              <PrivaterRoute>
-                <ViewZoneManager />
-              </PrivaterRoute>
-            }
-          />
-      </Routes>
-    </BrowserRouter>
+        <Route path="/schedules" element={<Schedules />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/testimonials/:id" element={<TestimonialView />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
   )
 }
 

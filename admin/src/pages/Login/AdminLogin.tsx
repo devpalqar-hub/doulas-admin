@@ -4,6 +4,7 @@ import styles from "./login.module.css";
 import { sendOtp, verifyOtp } from "../../services/auth.service";
 import { useToast } from "../../shared/toast/ToastContext";
 import { LuBadgeCheck, LuLock } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ const AdminLogin = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const { showToast } = useToast();
-
+  const navigate = useNavigate();
   // Send OTP
   const handleSendOtp = async (e: FormEvent) => {
     e.preventDefault();
@@ -45,7 +46,7 @@ const AdminLogin = () => {
 
       showToast("Login successful", "success");
 
-      window.location.href = "/dashboard";
+      navigate("/dashboard", { replace: true });
     } catch (err) {
       console.error(err);
       showToast("Invalid OTP or unauthorized admin", "error");
