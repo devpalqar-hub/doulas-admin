@@ -209,7 +209,7 @@ useEffect(() => {
                 <label>To</label>
                 <input
                     type="date"
-                    value={date1}
+                    value={date2}
                     onChange={(e) => {
                         setDate1(e.target.value);
                         setPage(1);
@@ -235,18 +235,22 @@ useEffect(() => {
               <div className={styles.stateRow}>No meetings found</div>
             ) : (
               meetings.map((m) => {
-                const [start, end] = m.enquiry.meetingsTimeSlots.split("-");
+                const enquiry = m.enquiry;
+                const name = enquiry?.name ?? "Unknown Client";
+                const initials = name.slice(0, 2).toUpperCase();
+                const timeSlot = m.enquiry?.meetingsTimeSlots;
+                const [start, end] = timeSlot ? timeSlot.split("-") : ["--", "--"];
 
                 return (
                   <div key={m.id} className={styles.meetingRow}>
                     <div className={styles.meetingLeft}>
                       <div className={styles.avatar}>
-                        {m.enquiry.name.slice(0, 2).toUpperCase()}
+                        {initials}
                       </div>
 
                       <div className={styles.meetingInfo}>
                         <div className={styles.metaRow}>
-                          <div className={styles.clientName}>{m.enquiry.name}</div>
+                          <div className={styles.clientName}>{name}</div>
                           <span className={`${styles.statusPill} ${
                             m.status === "COMPLETED"
                               ? styles.completed

@@ -16,6 +16,7 @@ import CreateZoneManager from './pages/zonemanagers/CreateZoneManager'
 import ViewZoneManager from "./pages/zonemanagers/ViewZoneManager";
 import Regions from './pages/regions/Regions';
 import EditRegion from './pages/regions/EditRegion';
+import DoulaEnquiries from './pages/doulaEnquiry/DoulaEnquiries';
 
 const PrivateRoute = () => {
   const token = localStorage.getItem("adminToken");
@@ -42,6 +43,8 @@ function App() {
 
         <Route path="/doulas" element={<ManageDoulas />} />
         <Route path="/doulas/:id" element={<ViewDoulaPage />} />
+
+        <Route path="/doulasEnquiry" element={<DoulaEnquiries />} />
 
         <Route path="/regions" element={<Regions />} />
         <Route path="/regions/create" element={<EditRegion />} />
