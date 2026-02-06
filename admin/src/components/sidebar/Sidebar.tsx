@@ -10,6 +10,7 @@ import { LuUsers } from "react-icons/lu";
 import { HiOutlineVideoCamera } from "react-icons/hi";
 import { GiTakeMyMoney, GiWorld } from "react-icons/gi";
 import { FiBookOpen, FiMessageSquare } from "react-icons/fi";
+import { BsQuestionCircle } from "react-icons/bs";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,7 +60,7 @@ const Sidebar = () => {
       <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
         {/* TOP PROFILE */}
         <div className={styles.profile}>
-          <img src="/doula-logo.png" className={styles.avatar} alt="User" />
+          <img src="/doula-logo.png" className={styles.avatar} alt="Logo" />
           <div className={styles.profileInfo}>
             <h4>ADMIN SITE</h4>
             <p>Admin@test.com</p>
@@ -108,6 +109,12 @@ const Sidebar = () => {
             `${styles.item} ${isActive ? styles.active : ""}`
           }>
             <LuUsers size={20} /> Manage Doulas
+          </NavLink>
+
+          <NavLink to="/doulasEnquiry" className={({ isActive }) =>
+            `${styles.item} ${isActive ? styles.active : ""}`
+          }>
+            <BsQuestionCircle size={20} /> Doulas Enquiry
           </NavLink>
 
           <NavLink to="/schedules" className={({ isActive }) =>

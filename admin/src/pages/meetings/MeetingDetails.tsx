@@ -24,8 +24,16 @@ const MeetingDetails = () => {
   if (loading) return <div className={styles.state}>Loading...</div>;
   if (!data) return <div className={styles.state}>Meeting not found</div>;
 
-  const [start, end] =
-    data.enquiry?.meetingsTimeSlots?.split("-") || [];
+  const enquiry = data.enquiry;
+
+  const name = enquiry?.name ?? "Unknown Client";
+  const email = enquiry?.email ?? "—";
+  const phone = enquiry?.phone ?? "—";
+  const initials = name.slice(0, 2).toUpperCase();
+
+  const timeSlot = enquiry?.meetingsTimeSlots;
+  const [start, end] = timeSlot ? timeSlot.split("-") : ["--", "--"];
+
 
   return (
     <div className={styles.root}>
@@ -92,13 +100,13 @@ const MeetingDetails = () => {
 
             <div className={styles.clientRow}>
               <div className={styles.avatar}>
-                {data.enquiry.name.slice(0, 2).toUpperCase()}
+                {initials}
               </div>
 
               <div>
-                <strong>{data.enquiry.name}</strong>
-                <p>{data.enquiry.email}</p>
-                <p>{data.enquiry.phone}</p>
+                <strong>{name}</strong>
+                <p>{email}</p>
+                <p>{phone}</p>
               </div>
             </div>
           </div>
