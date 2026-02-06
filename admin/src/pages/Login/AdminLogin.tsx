@@ -59,7 +59,7 @@ const AdminLogin = () => {
     <div className={styles.container}>
       {/* Left */}
       <div className={styles.leftSection}>
-        <img className={styles.logoCircle} src="/doula-branding.png" />
+        <img className={styles.logoCircle} src="/doula-branding.png" alt="bambini doulas logo"/>
         <h2>Doula Admin Panel</h2>
         <p>Secure administrative access for system management.</p>
 

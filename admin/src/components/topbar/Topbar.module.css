@@ -22,9 +22,10 @@
   height: 150px;
   width: 150px;
   object-fit: contain;
-  position: relative;
+  /* position: relative; */
   flex-shrink: 0;
 }
+
 @media (max-width: 768px) {
   .topbar {
     padding: 0 15px 0 70px;
