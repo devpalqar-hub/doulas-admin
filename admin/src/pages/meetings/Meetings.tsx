@@ -211,7 +211,7 @@ useEffect(() => {
                     type="date"
                     value={date2}
                     onChange={(e) => {
-                        setDate1(e.target.value);
+                        setDate2(e.target.value);
                         setPage(1);
                     }}
                 />
