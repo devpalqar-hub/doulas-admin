@@ -67,7 +67,7 @@ const Regions = () => {
           <div className={styles.tableCard}>
             <div className={styles.tableHeader}>
               <div>Name</div>
-              <div>District</div>
+              <div>Quinte</div>
               <div>State</div>
               <div>Status</div>
               <div>Actions</div>

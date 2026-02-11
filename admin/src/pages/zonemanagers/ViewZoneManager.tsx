@@ -6,7 +6,7 @@ import Topbar from "../../components/topbar/Topbar";
 import api from "../../services/api";
 
 const ViewZoneManager = () => {
-  const { id } = useParams(); // 👈 zonemanager ID from URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
 
   const [data, setData] = useState<any>(null);
@@ -82,7 +82,7 @@ const ViewZoneManager = () => {
                 <span>Doulas</span>
                     <strong>
                         {data.doulas && data.doulas.length > 0 ? (
-                        data.doulas.join(", ")
+                        data.doulas.map((d: any) => d.name).join(", ")
                         ) : (
                         <span className={styles.noDoula}>No doula assigned</span>
                         )}
