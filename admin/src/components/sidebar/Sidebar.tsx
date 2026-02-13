@@ -67,8 +67,7 @@ const Sidebar = () => {
         <div className={styles.profile}>
           <img src="/doula-logo.png" className={styles.avatar} alt="Logo" />
           <div className={styles.profileInfo}>
-            <h4>ADMIN SITE</h4>
-            <p>Admin@test.com</p>
+            <h4>ADMIN PANEL</h4>
           </div>
         </div>
 
