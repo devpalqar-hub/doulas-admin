@@ -111,7 +111,7 @@ const isFormValid = (): boolean => {
                 />
             </div>
             <div className={styles.field}>
-              <h5>District</h5>
+              <h5>Quinte</h5>
               <input
                 placeholder="District"
                 value={form.district}

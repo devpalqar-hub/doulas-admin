@@ -218,9 +218,6 @@ const Revenue = () => {
                 <div className={styles.revenueAmount}>
                   USD {animatedRevenue.toLocaleString("en-IN")}
                 </div>
-                <div className={styles.revenueHint}>
-                  Based on selected filters
-                </div>
               </>
             )}
           </div>
