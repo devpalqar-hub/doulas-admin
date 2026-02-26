@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import styles from "./Revenue.module.css";
@@ -22,10 +22,10 @@ const Revenue = () => {
   const [loading, setLoading] = useState(false);
 
   /* ================= PAGINATION  ================= */
-  const [page] = useState(1);
+  // const [page] = useState(1);
 //   const limit = 10;
-  const total = totalRevenue > 0 ? 1 : 0;
-  const totalPages = 1;
+  // const total = totalRevenue > 0 ? 1 : 0;
+  // const totalPages = 1;
 
   // ================ Dropdown DATA =================
   const [doulas, setDoulas] = useState<DoulaListItem[]>([]);
@@ -59,10 +59,10 @@ const Revenue = () => {
     load();
   }, [doulaId, regionId, serviceId, date1, date2]);
 
-  const visibleRange = useMemo(() => {
-    if (total === 0) return { from: 0, to: 0 };
-    return { from: 1, to: 1 };
-  }, [total]);
+  // const visibleRange = useMemo(() => {
+  //   if (total === 0) return { from: 0, to: 0 };
+  //   return { from: 1, to: 1 };
+  // }, [total]);
 
   const resetFilters = () => {
     setDoulaId("");
@@ -223,7 +223,7 @@ const Revenue = () => {
           </div>
 
           {/* PAGINATION (CONSISTENT UI) */}
-          <div className={styles.tableFooter}>
+          {/* <div className={styles.tableFooter}>
             <div className={styles.rowsInfo}>
               Showing {visibleRange.from} – {visibleRange.to} of {total}
             </div>
@@ -241,7 +241,7 @@ const Revenue = () => {
                 Next
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
