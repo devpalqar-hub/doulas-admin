@@ -130,7 +130,7 @@ const Testimonials = () => {
           >
             <option value="">All Doulas</option>
             {doulas.map((d) => (
-              <option key={doulaId} value={d.profileId}>
+              <option key={d.userId} value={d.profileId}>
                 {d.name}
               </option>
             ))}
