@@ -39,8 +39,6 @@ export const fetchAdminDoulas = async (params?: {
 
   const res = await api.get("/doula", { params: cleanParams });
 
-  const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
-
   const doulas: DoulaListItem[] = res.data.data.map((d: any) => ({
     userId: d.userId,
     name: d.name,
@@ -54,9 +52,7 @@ export const fetchAdminDoulas = async (params?: {
     ratings: d.ratings ?? null,
     reviewsCount: d.reviewsCount ?? 0,
     nextImmediateAvailabilityDate: d.nextImmediateAvailabilityDate ?? null,
-    profileImage: d.profile_image
-      ? `${IMAGE_BASE_URL}/${d.profile_image}`
-      : null,
+    profileImage: d.profile_image ?? null,
     isActive: d.isActive,
   }));
 

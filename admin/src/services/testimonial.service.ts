@@ -56,8 +56,13 @@ export const fetchAdminTestimonials = async (
   if (filters.doulaId) params.doulaId = filters.doulaId;
   if (filters.serviceId) params.serviceId = filters.serviceId;
   if (filters.ratings) params.ratings = filters.ratings;
-  if (filters.date1) params.date1 = new Date(filters.date1).toISOString();
-  if (filters.date2) params.date2 = new Date(filters.date2).toISOString();
+  if (filters.date1 && !isNaN(Date.parse(filters.date1))) {
+    params.date1 = new Date(filters.date1).toISOString();
+  }
+
+  if (filters.date2 && !isNaN(Date.parse(filters.date2))) {
+    params.date2 = new Date(filters.date2).toISOString();
+  }
 
   const res = await api.get(
     "/service-booked/testimonials/list/admin",

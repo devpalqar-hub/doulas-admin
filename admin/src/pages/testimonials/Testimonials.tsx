@@ -56,26 +56,31 @@ const Testimonials = () => {
 
   useEffect(() => {
     const load = async () => {
-      setLoading(true);
+      try {
+        setLoading(true);
 
-      const { testimonials, meta } = await fetchAdminTestimonials({
-        page,
-        limit,
-        serviceId,
-        doulaId: doulaId || undefined,
-        ratings: ratings ? Number(ratings) : undefined,
-        date1,
-        date2,
-      });
+        const { testimonials, meta } = await fetchAdminTestimonials({
+          page,
+          limit,
+          serviceId,
+          doulaId: doulaId || undefined,
+          ratings: ratings ? Number(ratings) : undefined,
+          date1,
+          date2,
+        });
 
-      setTestimonials(testimonials);
-      setTotal(meta.total);
-      setTotalPages(meta.totalPages);
-      setLoading(false);
+        setTestimonials(testimonials);
+        setTotal(meta.total);
+        setTotalPages(meta.totalPages);
+      } catch (err) {
+        console.error("Failed to fetch testimonials:", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
     load();
-  }, [page, serviceId, ratings, date1, date2]);
+  }, [page, serviceId, ratings, date1, date2, doulaId]);
 
   const stats = useMemo(() => {
     const totalCount = total;
@@ -125,7 +130,7 @@ const Testimonials = () => {
           >
             <option value="">All Doulas</option>
             {doulas.map((d) => (
-              <option key={d.userId} value={d.userId}>
+              <option key={d.userId} value={d.profileId}>
                 {d.name}
               </option>
             ))}
